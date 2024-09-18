@@ -1,4 +1,4 @@
-function Gameboard() {
+const board = (function () {
     const n = 3;
     const board = [];
 
@@ -24,7 +24,7 @@ function Gameboard() {
     }
 
     return { n, getBoard, clickCell, printBoard };
-}
+})();
 
 function Cell() {
     let value = 0;
@@ -46,7 +46,6 @@ function GameController(
     playerOneName = 'Player One',
     playerTwoName = 'Player Two'
 ) {
-    const board = Gameboard();
     let moveCount = 0;
     const players = [
         {
