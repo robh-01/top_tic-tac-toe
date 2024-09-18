@@ -35,7 +35,11 @@ function Cell() {
 
     const getValue = () => value;
 
-    return { markCell, getValue };
+    const resetCell = () => {
+        value = 0;
+    }
+
+    return { markCell, getValue, resetCell };
 }
 
 function GameController(
@@ -70,6 +74,24 @@ function GameController(
          turn.`);
     }
 
+    const resetBoard = () => {
+        let boardArray = board.getBoard();  // Get the 2D array
+
+        // Loop through each row and reset the cell's value to 0
+        for (let i = 0; i < boardArray.length; i++) {
+            for (let j = 0; j < boardArray[i].length; j++) {
+                boardArray[i][j].resetCell();
+            }
+        }
+    }
+
+    const playNewMatch = () => {
+        resetBoard();
+        moveCount = 0; //resets the moveCount for the nextMatch
+        activePlayer = players[0];
+        printNewRound();
+    }
+
     const playRound = (row, column) => {
         if (board.clickCell(row, column, getActivePlayer().mark)) {
             moveCount++;
@@ -81,7 +103,9 @@ function GameController(
                     break;
                 }
                 if (i == (board.n) - 1) {
-                    console.log(`${getActivePlayer().name} is the winner.`)
+                    console.log(`${getActivePlayer().name} is the winner.`);
+                    playNewMatch();
+                    return; //Prevent further execution of the function playRound
                 }
             }
 
@@ -91,7 +115,9 @@ function GameController(
                     break;
                 }
                 if (i == (board.n) - 1) {
-                    console.log(`${getActivePlayer().name} is the winner.`)
+                    console.log(`${getActivePlayer().name} is the winner.`);
+                    playNewMatch();
+                    return; //Prevent further execution of the function playRound
                 }
 
             }
@@ -103,7 +129,9 @@ function GameController(
                         break;
                     }
                     if (i == (board.n) - 1) {
-                        console.log(`${getActivePlayer().name} is the winner.`)
+                        console.log(`${getActivePlayer().name} is the winner.`);
+                        playNewMatch();
+                        return; //Prevent further execution of the function playRound
                     }
                 }
             }
@@ -115,13 +143,17 @@ function GameController(
                         break;
                     }
                     if (i == (board.n) - 1) {
-                        console.log(`${getActivePlayer().name} is the winner.`)
+                        console.log(`${getActivePlayer().name} is the winner.`);
+                        playNewMatch();
+                        return; //Prevent further execution of the function playRound
                     }
                 }
             }
 
-            if(moveCount == Math.pow(board.n,2)){
+            if (moveCount == Math.pow(board.n, 2)) {
                 console.log("It's a Draw")
+                playNewMatch();
+                return; //Prevent further execution of the function playRound
             }
 
 
