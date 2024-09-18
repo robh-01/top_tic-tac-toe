@@ -1,0 +1,15 @@
+.board {
+    border: 1px solid black;
+    display: grid;
+    grid-template: repeat(3, 1fr) / repeat(3,1fr);
+    gap: 5px;
+    height: 400px;
+    width: 400px;
+}
+
+
+/* .cell divs will be added from js */
+
+.board > .cell {
+    background-color: #78BEC5;
+}

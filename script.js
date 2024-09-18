@@ -166,8 +166,53 @@ function GameController(
     printNewRound();
 
     return {
-        playRound, getActivePlayer
+        playRound,
+        getActivePlayer
     };
 }
 
-const game = GameController();
+function ScreenController() {
+    const game = GameController();
+    const playerTurnDiv = document.querySelector('.turn');
+    const boardDiv = document.querySelector('.board');
+
+    const updateScreen = () => {
+        boardDiv.textContent = "";
+
+        const boardArray = board.getBoard();
+        const activePlayer = game.getActivePlayer();
+
+        playerTurnDiv.textContent = `${activePlayer.name}'s turn...`;
+
+        boardArray.forEach((row, rowIndex) => {
+            row.forEach((cell, colIndex) => {
+                const cellButton = document.createElement('button');
+                cellButton.classList.add('cell');
+
+                cellButton.dataset.row = rowIndex;
+                cellButton.dataset.column = colIndex;
+
+                {
+                    if (cell.getValue() == 0) {
+                        cell.textContent = "";
+                    }
+                    //assigned 'X' for player 1 and 'O' for player 2
+                    else if (cell.getValue() == 1) {
+                        cell.textContent = "X";
+                    }
+                    else cell.textContent = "O";
+                }
+
+                boardDiv.appendChild(cellButton);
+            })
+        })
+    }
+
+    function clickHandlerBoard(e) {
+        
+    }
+
+    updateScreen();
+}
+
+ScreenController();
