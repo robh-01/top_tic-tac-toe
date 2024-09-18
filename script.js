@@ -11,9 +11,9 @@ function Gameboard() {
 
     const getBoard = () => board;
 
-    const clickCell = (row, column, playerMark) => {
+    const clickCell = (row, column, player) => {
         if (board[row][column].getValue() === 0) {
-            board[row][column].markCell(playerMark);
+            board[row][column].markCell(player.mark);
             return 1;
         }
     }
@@ -93,7 +93,7 @@ function GameController(
     }
 
     const playRound = (row, column) => {
-        if (board.clickCell(row, column, getActivePlayer().mark)) {
+        if (board.clickCell(row, column, getActivePlayer())) {
             moveCount++;
             // check for win
 
