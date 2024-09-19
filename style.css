@@ -1,3 +1,9 @@
+.body {
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+}
+
 .board {
     border: 1px solid black;
     display: grid;
@@ -12,4 +18,15 @@
 
 .board > .cell {
     background-color: #78BEC5;
+}
+
+.win-screen {
+    position: fixed;
+    top: 1px;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(255, 0, 0, 0.308);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
