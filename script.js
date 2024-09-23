@@ -91,7 +91,7 @@ function GameController(
             if (board[row][i].getValue() != playerMark) {
                 break;
             }
-            if (i == (Board.n) - 1) {
+            if (i == n - 1) {
                 //for the console
                 console.log(`${getActivePlayer().name} is the winner.`);
                 //
@@ -104,7 +104,7 @@ function GameController(
             if (board[i][column].getValue() != playerMark) {
                 break;
             }
-            if (i == (n) - 1) {
+            if (i == n - 1) {
                 //for the console
                 console.log(`${getActivePlayer().name} is the winner.`);
                 //
@@ -115,7 +115,7 @@ function GameController(
 
         //check diagonal
         if (row == column) {
-            for (i = 0; i < n; i++) {
+            for (let i = 0; i < n; i++) {
                 if (board[i][i].getValue() != playerMark) {
                     break;
                 }
@@ -130,7 +130,7 @@ function GameController(
 
         //check anti-diagonal
         if (row + column == n - 1) {
-            for (i = 0; i < n; i++) {
+            for (let i = 0; i < n; i++) {
                 if (board[i][(n - 1) - i].getValue() != playerMark) {
                     break;
                 }
@@ -158,7 +158,7 @@ function GameController(
     const playRound = (row, column) => {
         if (Board.clickCell(row, column, getActivePlayer())) {
             moveCount++;
-            if (checkWin(row, column)) {
+            if (checkWin(+row, +column)) {
                 return { status: 'win', player: getActivePlayer() };
             }
             if (checkDraw()) {
@@ -226,8 +226,12 @@ function ScreenController() {
                     //assigned 'X' for player 1 and 'O' for player 2
                     else if (cell.getValue() == 1) {
                         cellButton.textContent = "X";
+                        cellButton.classList.add('cross');
                     }
-                    else cellButton.textContent = "O";
+                    else {
+                        cellButton.textContent = "O";
+                        cellButton.classList.add('circle');
+                    }
                 }
 
                 boardDiv.appendChild(cellButton);
